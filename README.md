@@ -61,14 +61,24 @@ graph LR
 
 ```text
 firmware/
-    ESP32 micro-ROS firmware
+└── esp32_led_control/
 
 ros2_ws/
-    ROS 2 workspace and packages
+└── src/
+    ├── keyboard_led_control/
+    │   └──  keyboard_publisher.py
+    │
+    └── led_control_msgs/
 
 docs/
-    diagrams, screenshots, demo GIFs
+└── diagrams, screenshots, demo GIFs
 ```
+
+| Package              | Purpose                                                                |
+| -------------------- | ---------------------------------------------------------------------- |
+| esp32_led_control    | ESP32 micro-ROS firmware that controls the LED and publishes its state |
+| keyboard_led_control | ROS2 nodes for sending LED commands and monitoring LED state           |
+| led_control_msgs     | Custom message definitions shared between ROS2 and ESP32               |
 
 ## Wiring
 
