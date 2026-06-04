@@ -15,12 +15,31 @@ The system allows keyboard input on a ROS 2 host machine to control an LED conne
 ## System Architecture
 
 ```mermaid
-flowchart LR
-    A["Keyboard Input"] --> B["ROS 2 Topic (/led_cmd)"]
-    B --> C["micro-ROS Agent"]
-    C --> D["ESP32 Subscriber"]
-    D --> E["GPIO Output"]
-    E --> F["LED"]
+graph LR
+
+    subgraph ROS2_Host
+        K[Keyboard Node]
+        S[State Monitor]
+    end
+
+    subgraph Network
+        A[micro-ROS Agent]
+    end
+
+    subgraph ESP32
+        E[micro-ROS Node]
+        G[GPIO]
+        L[LED]
+    end
+
+    K -->|/led_cmd| A
+    A -->|micro-ROS| E
+
+    E --> G
+    G --> L
+
+    E -->|/led_state| A
+    A --> S
 ```
 
 ## Hardware
